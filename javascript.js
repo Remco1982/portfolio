@@ -7,17 +7,55 @@ console.log(button);
 button.addEventListener('click', validateForm);
 
 function validateForm() {
-  if (hasElementError('name') || hasElementError('email') || hasElementError('message')) {
-    document.getElementById('form-error').style.display = 'block';
-    document.getElementById('success-message').style.display = 'none';
-  }
-  else {
-    document.getElementById('form-error').style.display = 'none';
-    const name = document.getElementById('name').value;
-    const success = document.getElementById('success-message');
-    success.innerText = 'Beste ' + name + ', Uw bericht is verzonden!';
-    success.style.display = 'block';
-  }
+  const form = document.getElementById('form');
+  const result = document.getElementById('result');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (hasElementError('name') || hasElementError('email') || hasElementError('message')) {
+      result.innerText = '';
+      result.className = 'form-result-error';
+      return;
+    }
+
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+    result.innerHTML = "Please wait..."
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json
+    })
+      .then(async (response) => {
+        let json = await response.json();
+        if (response.status == 200) {
+          const name = document.getElementById('name').value;
+
+          result.innerText = 'Beste ' + name + ', Uw bericht is verzonden!';
+          result.style.display = 'block';
+
+        } else {
+          console.log(response);
+          result.innerHTML = json.message;
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        result.innerHTML = "Something went wrong!";
+      })
+      .then(function () {
+        form.reset();
+        setTimeout(() => {
+          result.style.display = "none";
+        }, 3000);
+      });
+  });
 }
 
 window.addEventListener('scroll', doScrollFunctions);
@@ -80,45 +118,7 @@ window.onload = function () {
   document.getElementById('year').innerText = new Date().getFullYear();
 
   checkLastVisit();
-
-  const form = document.getElementById('form');
-  const result = document.getElementById('result');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-    result.innerHTML = "Please wait..."
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: json
-    })
-      .then(async (response) => {
-        let json = await response.json();
-        if (response.status == 200) {
-          result.innerHTML = "Form submitted successfully";
-        } else {
-          console.log(response);
-          result.innerHTML = json.message;
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        result.innerHTML = "Something went wrong!";
-      })
-      .then(function () {
-        form.reset();
-        setTimeout(() => {
-          result.style.display = "none";
-        }, 3000);
-      });
-  });
+  validateForm();
 };
 
 function checkLastVisit() {
