@@ -79,7 +79,11 @@
     <a href="www.linkedin.com/in/remco-baart-61844031b">Mijn Linkedin</a>
   </div>
 
-  <div id="contact-form" class="contactform">
+  <div id="contact-form" class="contactform" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" vakue="dc7e7183-a605-4489-8751-e9a0db840c49">
+
+    <!-- Replace with your Access Key -->
+    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
     <h3 id="contactFormulier">Contact Formulier</h3>
     <form>
       <label for="name">naam:</label>
@@ -88,8 +92,11 @@
       <input type="email" id="email" name="email">
 
       <label>Bericht:</label>
-      <textarea id="message"></textarea>
-      <button type="button">Verstuur</button>
+      <textarea id="message" name="message" required></textarea>
+      <p id="form-result"></p>
+      <p id="result"></p>
+
+      <button type="submit">Verstuur</button>
 
       <p id="form-error" class="form-error">een fout met het invullen van het formulier</p>
       <p id="success-message" class="success-message"></p>
