@@ -24,9 +24,8 @@ header {
     cursor: pointer;
 }
 
-.scroll.to.top-show {
+.scroll-to-top-show {
     display: flex;
-
 }
 
 .header-colored {
