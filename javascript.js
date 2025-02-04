@@ -65,7 +65,6 @@ function doScrollFunctions() {
   hideAfterScroll();
 }
 
-
 function startAnimation(id, classToBe) {
   const el = document.getElementById(id);
 
@@ -77,11 +76,18 @@ function startAnimation(id, classToBe) {
 function hideAfterScroll() {
   if (window.scrollY > 0) {
     document.getElementById('header').classList.add('header-colored');
+    document.getElementById('scroll-to-top').classList.add('scroll-to-top-show');
+
   } else {
     document.getElementById('header').classList.remove('header-colored');
+    document.getElementById('scroll-to-top').classList.remove('scroll-to-top-show');
   }
 }
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth'});
+  
+}
 function hasElementError(elementId) {
   const element = document.getElementById(elementId).value;
 
