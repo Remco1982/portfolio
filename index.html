@@ -79,37 +79,31 @@
     <a href="www.linkedin.com/in/remco-baart-61844031b">Mijn Linkedin</a>
   </div>
 
-  <div id="contact-form" class="contactform" action="https://api.web3forms.com/submit" method="POST">
+  <h3 id="contactFormulier">Contact Formulier</h3>
+  <form id="contact-form" class="contactform" action="https://api.web3forms.com/submit" method="POST">
     <input type="hidden" name="access_key" value="dc7e7183-a605-4489-8751-e9a0db840c49">
 
-    <!-- Replace with your Access Key -->
-    
-    <h3 id="contactFormulier">Contact Formulier</h3>
-    <form>
-      <label for="name">naam:</label>
-      <input type="text" id="name" name="name">
-      <label for="tediz2002@hotmail.com">E-mail:</label>
-      <input type="email" id="email" name="email">
+    <label for="name">naam*:</label>
+    <input type="text" id="name" name="name" required>
 
-      <label>Bericht:</label>
-      <textarea id="message" name="message" required></textarea>
-      <p id="form-result"></p>
-      <p id="result"></p>
+    <label for="email">E-mail*:</label>
+    <input type="email" id="email" name="email" required>
 
-      <button type="submit">Verstuur</button>
+    <label for="message">Bericht*:</label>
+    <textarea id="message" name="message" required></textarea>
 
-      <p id="form-error" class="form-error">een fout met het invullen van het formulier</p>
-      <p id="success-message" class="success-message"></p>
-      <p id="last-visit" class="last-visit"></p>
+    <p id="result"></p>
 
-    </form>
-  </div>
+    <button type="submit">Verstuur</button>
+    <p id="last-visit" class="last-visit"></p>
+  </form>
+
   <img src="Joki.jpg" class="myimage" alt="Joki">
 
   <footer>
     <div class="footer">
       <p>&copy; <span id="year"></span> Portfolio Remco </p>
-    </div> 
+    </div>
   </footer>
 </body>
 
