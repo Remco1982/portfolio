@@ -1,10 +1,6 @@
 const test = document.getElementById("my-title");
 test.innerText = 'Hallo javascript werkt';
 
-const button = document.querySelector('button');
-console.log(button);
-
-button.addEventListener('click', validateForm);
 
 function validateForm() {
   const form = document.getElementById('form');
@@ -90,8 +86,7 @@ function hasElementError(elementId) {
   const element = document.getElementById(elementId).value;
 
   if (element === '' || element.length < 2) {
-    document.getElementById('form-error').style.display = 'block';
-    document.getElementById('success-message').style.display = 'none';
+
     return true;
   }
 
